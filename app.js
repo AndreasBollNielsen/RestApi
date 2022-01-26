@@ -8,18 +8,19 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
 
-const firstname ="kris";
-const lastname = "pedersen";
-const birthdate = "pedersen";
-const deathdate = "pedersen";
-const description = "pedersen";
-const user = {'firstname':firstname,'lastname':lastname,'birthdate':birthdate,'deathdate':deathdate,'description':description};
+const firstname ="Adolf";
+const lastname = "Hitler";
+const birthdate = "20-4-1889";
+const deathdate = "30-5-1945";
+const description = "var en lille gut som ikke brød sig om jøder. fun fact han var vegetar";
+const dictator = {'firstname':firstname,'lastname':lastname,'birthdate':birthdate,'deathdate':deathdate,'description':description};
 
-const dictators = [user,user,user];
+const dictators = [dictator];
 
+//get method
 app.get('/', (req,res) => {res.send(dictators)});
 
-
+//post method
 app.post('/repos',function (req,res)  
 {
     const firstname = req.body.firstname;
@@ -30,26 +31,17 @@ app.post('/repos',function (req,res)
     const dictator ={'firstname':firstname,'lastname':lastname,'birthdate':birthdate,'deathdate':deathdate,'description':description};
     dictators.push(dictator);
     res.send(dictators)
-    // console.log(firstname,'username');
-    // res.send({'firstname':firstname,'lastname':lastname})
-
+   
 });
 
+//delete method
 app.delete('/del',(req,res) => {
    
+    
     const reposIndex = req.body.index;
-   
     dictators.splice(reposIndex,1);
     
 });
 
-
+//output port listener
 app.listen(port, () =>{console.log(`port is listening ${process}` )} );
-
-
-
-
-// app.get('/palle', (req, res) => {res.send('there is life on the moon!')});
-// app.listen(port, () => {
-//     console.log(`listening on port ${port}`)
-// });
